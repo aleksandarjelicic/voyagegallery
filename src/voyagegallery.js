@@ -162,10 +162,10 @@
 
                 console.log('this click', thisImg);
 
-                thisImg.parent().parent().append('<div class="voyage__imageWrap"><div class="voyage__image"><figcaption></figcaption><figure><img src="'+ imgSrc +'"></figure><div class="voyage__close">Close</div><div class="voyage__arrow voyage__arrow--left">Left</div><div class="voyage__arrow voyage__arrow--right">Right</div></div></div></div>');
+                thisImg.parent().parent().append('<div class="voyage__imageWrap"><div class="voyage__image"><figcaption></figcaption><figure><img src="'+ imgSrc +'"></figure><div class="voyage__close"></div><div class="voyage__arrow voyage__arrow--left"></div><div class="voyage__arrow voyage__arrow--right"></div></div></div></div>');
 
                 if (settings.thumbnails == true) {
-                    thisImg.parent().parent().find('.voyage__imageWrap').append('<div class="voyage__fullThumbnailsWrap"><div class="voyage__fullThumbnails"></div><div class="voyage__fullThumbnailsArrow voyage__fullThumbnailsArrow--left">Left</div><div class="voyage__fullThumbnailsArrow voyage__fullThumbnailsArrow--right">Right</div>');
+                    thisImg.parent().parent().find('.voyage__imageWrap').append('<div class="voyage__fullThumbnailsWrap"><div class="voyage__fullThumbnails"></div><div class="voyage__fullThumbnailsArrow voyage__fullThumbnailsArrow--left"></div><div class="voyage__fullThumbnailsArrow voyage__fullThumbnailsArrow--right"></div>');
                 }
 
                 $(thisImg.parent().find('a[data-rel="'+ dataRel +'"]')).each(function(index, item) {
