@@ -1,3 +1,3 @@
 # voyagegallery
-jQuery gallery
+jQuery gallery <br>
 Under construction
