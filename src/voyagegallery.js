@@ -96,7 +96,7 @@
                 openGallery(thisThis);
             }
 
-            $(this).find('a').click(function(e) {
+            $(this).find('.voyage__thumbnails a').click(function(e) {
                 e.preventDefault();
 
                 openGallery($(this));
