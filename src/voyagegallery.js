@@ -227,7 +227,6 @@
 
             $(this).on('click', '.voyage__arrow--left', function() {
                leftArrow();
-               imgNoInUrl();
             });
 
             function leftArrow() {
