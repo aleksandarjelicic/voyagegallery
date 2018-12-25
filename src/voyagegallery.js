@@ -33,42 +33,30 @@
             document.getElementsByTagName('head')[0].appendChild(script);
         }
 
-        var urlOpenGallery = true;
         // lets check if url points to an image
-        var urlImageNo = null;
+        var urlGalNo = null;
         var url = window.location.href;
         var regex = /gal\=(\d*)/gm;
         var n = regex.exec(url);
 
-
-        if (n && n[1] && urlOpenGallery) {
+        if (n && n[1]) {
             // yes it does
-            console.log('Gal Number', n[1]);
-            urlImageNo = n[1];
-
-            urlOpenGallery = false;
+            urlGalNo = n[1];
         }
 
-
         // lets check if url points to an image
-        // var urlImageNo = null;
         var url2 = window.location.href;
         var regex2 = /img\=(\d*)/gm;
         var n2 = regex2.exec(url2);
 
         if (n2 && n2[1]) {
             // yes it does
-            console.log('Img Number', n2[1]);
-            urlImageNo2 = n2[1];
+            urlImageNo = n2[1];
         }
 
+        var globalThis = this;
 
-
-
-
-
-
-
+        console.log('globalThis', globalThis);
 
         return this.each(function(index, item){
 
@@ -103,52 +91,20 @@
             var visibleThumbs;
             var visibleThumbsRemainder;
 
-
-
-
-
-
-
-
-
-
-
-            if(urlImageNo == index) {
-
-                // gallery.goToSlide(parseInt(urlImageNo));
-
-                // thisThis = $(this).find('a');
-                // thisThis = thisThis.eq(urlImageNo);
-                // imagePosition = urlImageNo2;
-
-
-
-                thisThis = $(this).eq(urlImageNo).find('a').eq(urlImageNo2);
-                // thisThis = $(this).eq(index);
-
-
-
-
-                console.log('thisThis', thisThis);
+            if(urlGalNo == index) {
+                thisThis = globalThis.eq(urlGalNo).find('a').eq(urlImageNo);
                 openGallery(thisThis);
-
-                urlOpenGallery = false;
-
-            } 
-
-
+            }
 
             $(this).find('a').click(function(e) {
                 e.preventDefault();
 
-                // var thisThis = $(this)
                 openGallery($(this));
 
             });
             
             function openGallery(thisImg) {
                 settings.onBeforeSliderOpens();
-
 
                 console.log('Gallery image click start');
 
@@ -187,15 +143,12 @@
 
                 console.log('imageList', imageList);
 
-
                 captionSettings();
 
                 console.log('imagePosition', imagePosition);
      
                 imagePosition = searchObj(imgSrc, imageList);
                 console.log('Search object position in array', imagePosition);
-
-
 
                 if (settings.thumbnails == true) {
                     $(window).bind('resizeEnd', function() {
@@ -239,8 +192,6 @@
 
                 settings.onAfterSliderOpens();
             }
-
-            
             
             $(this).on('click', '.voyage__fullThumbnails a', function(e) {
 
@@ -304,7 +255,6 @@
                 rightArrow();
             });
 
-
             function rightArrow() {
                 if (imagePosition < imageList.length - 1) {
                     settings.onBeforeNextSlide();                    
@@ -336,7 +286,6 @@
                     leftArrow();
                 });
             }
-            
 
             $(this).on('click', '.voyage__fullThumbnailsArrow--left', function() {
                 if (thumbCircle > 0) {
@@ -487,6 +436,7 @@
             function imgNoInUrl() {
                 if (settings.imgNoInUrl == true) {
                     window.history.replaceState(null, null, '?gal=' + galleryIndex + '?img=' + parseInt(imagePosition));
+                    console.log('window.location.hash', window.location);
                 }
             }
 
@@ -553,26 +503,3 @@
     });
 
 }(jQuery));
-
-// Neki test
-// let options = {
-//     item: 1,
-//     loop: true,
-//     cuniBacka: false
-//   }
-
-//   let events = {
-//     onStart: function() {},
-//     onClose: function() {}
-//   }
-
-//   $('#imageGallery').ourNewPlugin(options, events);
-
-// });
-
-
-
-// $.fn.ourNewPlugin = function(options, events) {
-  // this element na kom si pozvao funciju
-  // options ... prosledjeni parametri funkcije
-// }
