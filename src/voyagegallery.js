@@ -57,41 +57,42 @@
 
         var globalThis = this;
 
+        
         console.log('globalThis', globalThis);
-
+        
         return this.each(function(index, item){
-
+            
             console.log('this slider', this);
             console.log('$(this) slider', $(this));
             console.log('this slider index', index);
             console.log('$(this) item', item);
-
+            
             var galleryIndex = index;
-
+            
             settings.onBeforeSliderStart();
-
+            
             var dataRel;
             var imgSrc;
             var imgCaption;
             var imageList = [ ];
             var imagePosition = 0;
             var thumbPosition = 0;
-
+            
             var thumbWidth = 0;
             var thumbHeight = 0;
             var captionHeight = 0;
-
+            
             var circleArray = [[]];
             var thumbCircle = 0;
             var mainIndex = 0;
             var maxThumbCircle = 0;
             var maxThumbCircleReminder = 0;
             var thumbTotal;
-
+            
             var fullThumbnailsWidth;
             var visibleThumbs;
             var visibleThumbsRemainder;
-
+            
             if(urlGalNo == index) {
                 thisThis = globalThis.eq(urlGalNo).find('a').eq(urlImageNo);
                 openGallery(thisThis);
@@ -105,6 +106,11 @@
             });
             
             function openGallery(thisImg) {
+
+                openGalImg = thisImg;
+
+                openGalImg.focus();
+
                 settings.onBeforeSliderOpens();
 
                 console.log('Gallery image click start');
@@ -498,11 +504,16 @@
                     return false;
                 }
             });
+
+            // Keeping focus because of keyboard events
+            $(this).on('click', '.voyage__image', function(){
+                openGalImg.focus();
+            })
+            
             settings.onAfterSliderLoad();
         })
 
     }
-    
 
     $(window).resize(function() {
         if(this.resizeTO) clearTimeout(this.resizeTO);
