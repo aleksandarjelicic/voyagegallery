@@ -16,6 +16,7 @@
             thumbnails: true,
             imgNoInUrl: true,
             imageLoop: true,
+            autoPlay: true,
             swipe: true,
             onBeforeSliderStart: function(){},
             onAfterSliderLoad: function(){},
@@ -92,6 +93,8 @@
             var fullThumbnailsWidth;
             var visibleThumbs;
             var visibleThumbsRemainder;
+
+            var autoPlayTimeOut;
             
             if(urlGalNo == index) {
                 thisThis = globalThis.eq(urlGalNo).find('a').eq(urlImageNo);
@@ -198,6 +201,12 @@
                 console.log('Gallery image click end');
 
                 settings.onAfterSliderOpens();
+                
+                if (settings.autoPlay == true) {
+                    imagePosition--;
+                    rightArrow();
+                }
+
             }
             
             $(this).on('click', '.voyage__fullThumbnails a', function(e) {
@@ -288,8 +297,12 @@
                 // imageHeight()
 
                 imgNoInUrl();
-            }
 
+                if (settings.autoPlay == true) {
+                    autoPlayTimeOut = setTimeout(rightArrow, 1200);
+                }
+            }
+            
             if(settings.swipe == true) {
                 document.addEventListener('swiped-left', function(e) {
                     console.log('Swiped left');
@@ -460,6 +473,7 @@
             });
 
             function closeGallery() {
+                clearTimeout(autoPlayTimeOut);
                 $('body').removeClass('activeGallery');
                 $('.voyage__background').remove();
                 $('.voyage__imageWrap').remove();
