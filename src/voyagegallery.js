@@ -15,6 +15,7 @@
             captionPosition : 'top',
             thumbnails: true,
             imgNoInUrl: true,
+            imageLoop: true,
             swipe: true,
             onBeforeSliderStart: function(){},
             onAfterSliderLoad: function(){},
@@ -226,28 +227,32 @@
             });
 
             $(this).on('click', '.voyage__arrow--left', function() {
-               leftArrow();
+                leftArrow();
             });
 
             function leftArrow() {
+                settings.onBeforePrevSlide();
+
                 if (imagePosition > 0) {
-                    settings.onBeforePrevSlide();
-
                     imagePosition -= 1;
-                    changeImage();
-
-                    mainIndex = nestedIndex(circleArray, imagePosition);
-                    thumbCircle = mainIndex;
-                    
-                    changeThumbCircle();
-
-                    thumbActive();
-
-                    // imageHeight()
-
-                    imgNoInUrl();
+                } else if (imagePosition == 0) {
+                    if (settings.imageLoop == true) {
+                        imagePosition = imageList.length - 1;
+                    }
                 }
+
+                changeImage();
+
+                mainIndex = nestedIndex(circleArray, imagePosition);
+                thumbCircle = mainIndex;
                 
+                changeThumbCircle();
+
+                thumbActive();
+
+                // imageHeight()
+
+                imgNoInUrl();
             }
 
             $(this).on('click', '.voyage__arrow--right', function() {
@@ -255,23 +260,28 @@
             });
 
             function rightArrow() {
+                settings.onBeforeNextSlide();
+                
                 if (imagePosition < imageList.length - 1) {
-                    settings.onBeforeNextSlide();                    
-                    
                     imagePosition += 1;
-                    changeImage();
-                    
-                    mainIndex = nestedIndex(circleArray, imagePosition);
-                    thumbCircle = mainIndex;
-                    
-                    changeThumbCircle();
-
-                    thumbActive();
-
-                    // imageHeight()
-
-                    imgNoInUrl();
+                } else if (imagePosition == imageList.length - 1) {
+                    if (settings.imageLoop == true) {
+                        imagePosition = 0;
+                    }
                 }
+                
+                changeImage();
+
+                mainIndex = nestedIndex(circleArray, imagePosition);
+                thumbCircle = mainIndex;
+                
+                changeThumbCircle();
+
+                thumbActive();
+
+                // imageHeight()
+
+                imgNoInUrl();
             }
 
             if(settings.swipe == true) {
@@ -475,8 +485,8 @@
             //         currentImg.css('height', 'calc(100vh - ' + thumbCaptionHeight + 'px)');
             //     }
             // }
-            
-            $(document).on('keydown', function(e){
+
+            $(this).on('keyup', function(e){
                 if (e.which == 37) { 
                     leftArrow();
                     return false;
