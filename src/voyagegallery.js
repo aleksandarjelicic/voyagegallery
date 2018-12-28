@@ -18,6 +18,7 @@
             imageLoop: true,
             autoPlayIcon: true,
             autoPlay: true,
+            autoPlayTransitionTime: 2000,
             swipe: true,
             onBeforeSliderStart: function(){},
             onAfterSliderLoad: function(){},
@@ -307,7 +308,7 @@
                 imgNoInUrl();
 
                 if (autoPlayOn == true) {
-                    autoPlayTimeOut = setTimeout(rightArrow, 2000);
+                    autoPlayTimeOut = setTimeout(rightArrow, settings.autoPlayTransitionTime);
                 }
             }
             
