@@ -251,6 +251,7 @@
             });
 
             $(this).on('click', '.voyage__arrow--left', function() {
+                stopAutoPlay();
                 leftArrow();
             });
 
@@ -280,6 +281,7 @@
             }
 
             $(this).on('click', '.voyage__arrow--right', function() {
+                stopAutoPlay();
                 rightArrow();
             });
 
@@ -330,9 +332,7 @@
                     autoPlayOn = true;
                     rightArrow();
                 } else {
-                    $(this).removeClass('voyage__autoPlay--pause');
-                    autoPlayOn = false;
-                    clearTimeout(autoPlayTimeOut);
+                    stopAutoPlay();
                 }
             });
 
@@ -489,12 +489,18 @@
                 }
             }
 
+            function stopAutoPlay() {
+                $('.voyage__autoPlay').removeClass('voyage__autoPlay--pause');
+                autoPlayOn = false;
+                clearTimeout(autoPlayTimeOut);
+            }
+
             $(this).on('click', '.voyage__close', function() {
                 closeGallery();
             });
 
             function closeGallery() {
-                clearTimeout(autoPlayTimeOut);
+                stopAutoPlay();
                 $('body').removeClass('activeGallery');
                 $('.voyage__background').remove();
                 $('.voyage__imageWrap').remove();
@@ -528,13 +534,16 @@
             // }
 
             $(this).on('keyup', function(e){
-                if (e.which == 37) { 
+                if (e.which == 37) {
+                    stopAutoPlay();
                     leftArrow();
                     return false;
                 } else if (e.which == 39) {
+                    stopAutoPlay();
                     rightArrow();
                     return false;
                 } else if (e.which == 27) {
+                    stopAutoPlay();
                     closeGallery();
                     return false;
                 }
