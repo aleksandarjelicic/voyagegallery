@@ -60,16 +60,16 @@
 
         var globalThis = this;
 
-        
-        console.log('globalThis', globalThis);
-        
         return this.each(function(index, item){
-            
             console.log('this slider', this);
             console.log('$(this) slider', $(this));
             console.log('this slider index', index);
             console.log('$(this) item', item);
             
+            this.goToSlide = function(option) {
+                console.log('Gallery', option);
+            }
+
             var galleryIndex = index;
             
             settings.onBeforeSliderStart();
@@ -556,7 +556,6 @@
             
             settings.onAfterSliderLoad();
         })
-
     }
 
     $(window).resize(function() {
