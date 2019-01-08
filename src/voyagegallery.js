@@ -65,9 +65,13 @@
             console.log('$(this) slider', $(this));
             console.log('this slider index', index);
             console.log('$(this) item', item);
-            
-            this.goToSlide = function(option) {
-                console.log('Gallery', option);
+
+            this.goToSlide = function(goToGalNo, goToSlideNo) {
+                // if goToSlide parameters are numbers and there is no number in url
+                if(Number.isInteger(goToGalNo) && Number.isInteger(goToSlideNo) && urlGalNo == null) {
+                    thisThis = globalThis.eq(goToGalNo).find('a').eq(goToSlideNo);
+                    openGallery(thisThis);   
+                }
             }
 
             var galleryIndex = index;
